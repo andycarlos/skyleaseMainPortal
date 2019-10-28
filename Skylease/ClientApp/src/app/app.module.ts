@@ -1,34 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NavBarComponent } from './component/nav-bar/nav-bar.component';
+import { HomeComponent } from './component/home/home.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { AboutComponent } from './component/about/about.component';
+import { ServicesComponent } from './component/services/services.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewsComponent } from './component/news/news.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
+    NavBarComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    FooterComponent,
+    AboutComponent,
+    ServicesComponent,
+    NewsComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    AppRoutingModule,
+    NgbModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatCardModule,
+    MatButtonModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [ MatCardModule, MatButtonModule ]
 })
 export class AppModule { }

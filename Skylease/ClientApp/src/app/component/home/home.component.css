@@ -1,0 +1,38 @@
+.form-tracking button {
+  display: block;
+  float: left;
+  width: 67px;
+  margin: 0;
+  height: 58px;
+  line-height: 58px;
+  text-align: center;
+  background-color: #993333;
+  color: #FFF;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  padding: 0;
+  border: 0;
+}
+.form-tracking .text-tracking {
+    display: block;
+    float: right;
+    width: 76%;
+    margin: 0;
+    height: 58px;
+    line-height: 58px;
+    background-color: #FFF;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    padding: 0 2%;
+    border: 0;
+    font-style: italic;
+    font-weight: 400;
+}
+.form-tracking.inactive {
+    opacity: 0;
+}
+
+#contact {
+  margin-top: 50px
+}

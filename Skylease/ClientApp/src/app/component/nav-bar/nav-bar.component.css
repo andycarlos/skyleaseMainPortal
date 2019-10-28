@@ -1,0 +1,32 @@
+.navbar {
+  margin-bottom: 0;
+  background-color: white;
+  z-index: 9999;
+  border: 0;
+  font-size: 16px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  border-radius: 0;
+}
+.navbar li a, .navbar .navbar-brand {
+  color: black !important;
+}
+
+.navbar-nav li a:hover {
+  color: white !important;
+  background-color:  #FFA536 !important;
+}
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: black !important;
+}
+#logo {
+  border-radius: 3%;
+}
+#logoDiv{
+  position: absolute;
+  z-index: 10000;
+  height: 100%;
+
+}
+
