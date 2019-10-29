@@ -34,6 +34,9 @@ namespace Skylease.Controllers
                 XmlSerializer xmlSerializer2 = new XmlSerializer(typeof(Models.agent.diffgram));
                 Models.agent.diffgram agent = (Models.agent.diffgram)xmlSerializer2.Deserialize(c.Nodes[1].CreateReader());
 
+                XmlSerializer xmlSerializer3 = new XmlSerializer(typeof(Models.book.diffgram));
+                Models.book.diffgram book = (Models.book.diffgram)xmlSerializer3.Deserialize(d.Nodes[1].CreateReader());
+
                 List<Models.trakingHistory.NewDataSetTable> trakings = trakin.NewDataSet.OrderBy(x => x.DATEIN).ToList();
 
                 traking = new Traking()
@@ -41,7 +44,7 @@ namespace Skylease.Controllers
                     Name =(agent.NewDataSet==null)?"No Agent": agent.NewDataSet.Table.Name.Trim(),
                     Origin = awb.NewDataSet.Table.origin.Trim(),
                     Destination = awb.NewDataSet.Table.destination.Trim(),
-                    CargoType = "GENERAL",
+                    CargoType = book.NewDataSet.Table.commodity.Trim(),
                     Pieces = awb.NewDataSet.Table.totpieces.ToString(),
                     Weight = Math.Round(awb.NewDataSet.Table.totweight, 0).ToString(),
                     Volumen = Math.Round(awb.NewDataSet.Table.totvolume, 0).ToString(),

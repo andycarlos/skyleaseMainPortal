@@ -626,3 +626,80 @@ namespace Skylease.Models.agent
         }
     }
 }
+namespace Skylease.Models.book 
+{
+
+    // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1", IsNullable = false)]
+    public partial class diffgram
+    {
+
+        private NewDataSet newDataSetField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace = "")]
+        public NewDataSet NewDataSet
+        {
+            get
+            {
+                return this.newDataSetField;
+            }
+            set
+            {
+                this.newDataSetField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class NewDataSet
+    {
+
+        private NewDataSetTable tableField;
+
+        /// <remarks/>
+        public NewDataSetTable Table
+        {
+            get
+            {
+                return this.tableField;
+            }
+            set
+            {
+                this.tableField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class NewDataSetTable
+    {
+        private string commodityField;
+        /// <remarks/>
+        public string commodity
+        {
+            get
+            {
+                return this.commodityField;
+            }
+            set
+            {
+                this.commodityField = value;
+            }
+        }
+
+    }
+
+
+}
