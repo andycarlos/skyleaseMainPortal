@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Skylease.Models
 {
@@ -18,14 +16,14 @@ namespace Skylease.Models
     }
     public class TrakingHistor
     {
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
         public string Pieces { get; set; }
         public string Weight { get; set; }
         public string Note { get; set; }
     }
 
 
-  
+
 
 
 }

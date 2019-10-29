@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TrackingService } from 'src/app/services/tracking.service';
+import { TrackingService, Tracking } from '../../services/tracking.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,12 @@ import { TrackingService } from 'src/app/services/tracking.service';
 export class HomeComponent implements OnInit {
 
   contact: FormGroup;
-  tracking: string;
-
+    tracking: string = "57650272784";
+    openModal: boolean = false;
+    track: Tracking;
+    timerAmimation: number = 2.3;
   constructor(private formBuilder: FormBuilder,
-              private trackingService: TrackingService) { }
+        private trackingService: TrackingService) { }
 
   ngOnInit() {
 
@@ -23,9 +26,16 @@ export class HomeComponent implements OnInit {
       comments: ['', Validators.required]
     });
   }
-  GetTracking(){
-    this.trackingService.getTracking(this.tracking).subscribe(valor => {
-      console.log(valor);
-    });
-  }
+
+    GetTracking() {
+        
+        this.track = null;
+        this.trackingService.getTracking(this.tracking).subscribe(valor => {
+           this.openModal = true; 
+            this.track = valor;
+        });
+    }
+    close() {
+        this.openModal = false;
+    }
 }

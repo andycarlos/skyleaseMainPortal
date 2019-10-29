@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Skylease.Models.awb
+﻿namespace Skylease.Models.awb
 {
     // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
     /// <remarks/>
@@ -218,6 +213,7 @@ namespace Skylease.Models.awb
 namespace Skylease.Models.trakingHistory
 {
 
+
     // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
     /// <remarks/>
     [System.SerializableAttribute()]
@@ -252,7 +248,7 @@ namespace Skylease.Models.trakingHistory
     public partial class NewDataSetTable
     {
 
-        private ushort idField;
+        private uint idField;
 
         private string sOURCEField;
 
@@ -264,7 +260,7 @@ namespace Skylease.Models.trakingHistory
 
         private ulong rEFERENCEField;
 
-        private int pIECESField;
+        private byte pIECESField;
 
         private ushort wEIGHTField;
 
@@ -276,10 +272,10 @@ namespace Skylease.Models.trakingHistory
 
         private string idField1;
 
-        private int rowOrderField;
+        private byte rowOrderField;
 
         /// <remarks/>
-        public ushort ID
+        public uint ID
         {
             get
             {
@@ -357,7 +353,7 @@ namespace Skylease.Models.trakingHistory
         }
 
         /// <remarks/>
-        public int PIECES
+        public byte PIECES
         {
             get
             {
@@ -437,7 +433,7 @@ namespace Skylease.Models.trakingHistory
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(Form = System.Xml.Schema.XmlSchemaForm.Qualified, Namespace = "urn:schemas-microsoft-com:xml-msdata")]
-        public int rowOrder
+        public byte rowOrder
         {
             get
             {
@@ -474,6 +470,8 @@ namespace Skylease.Models.trakingHistory
             }
         }
     }
+
+
 }
 namespace Skylease.Models.agent
 {

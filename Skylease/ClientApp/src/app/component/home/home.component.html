@@ -1,9 +1,9 @@
 <div class="container-fluid fixed-top " style="margin-top: 145px;">
   <div class="row justify-content-end">
-    <div class="col justify-content-center" style="display: inline; flex-basis: unset; flex-grow: 0; width: max-content;" >
+    <div class="col justify-content-center" style="display: inline; flex-basis: unset; flex-grow: 0; width: max-content;">
       <div class="form-tracking" style=" width: 280px;">
-          <button type="button" (click)="GetTracking()">TRACK</button>
-          <input type="text" name="awbno" value="" id="text-tracking" class="text-tracking" placeholder="Air Waybill #" [(ngModel)]="tracking"/>
+        <button type="button" (click)="GetTracking()">TRACK</button>
+        <input type="text" name="awbno" id="text-tracking" class="text-tracking"  placeholder="Air Waybill #" [(ngModel)]="tracking" />
       </div>
     </div>
   </div>
@@ -79,6 +79,90 @@
     </div>
   </div>
 </form>
+
+<!-- Modal -->
+<div  *ngIf="openModal" class="modal fade bd-example-modal-xl show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block; padding-right: 17px">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-white text-center colorModal">
+        <h5 *ngIf="track" class="modal-title" id="exampleModalLabel">Airwaybill: {{tracking}} - {{track.name}}</h5>
+        <h5 *ngIf="!track" class="modal-title" id="exampleModalLabel">ERROR! Airwaybill ({{tracking}}) doesn't exist.</h5>
+        <button type="button" (click)="close()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!track" class="error">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" width="100px" height="100px" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="rgb(207, 54, 49)" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+        </div>
+        <div *ngIf="track">
+          <div class="card-columns">
+            <div class="card text-center text-white bg-secondary zoomIn animated delay-05s">
+              <div class="card-body">
+                <h5 class="card-title">ORIGIN</h5>
+                <p class="card-text">{{track.origin}}</p>
+              </div>
+            </div>
+            <div class="card text-center text-white bg-secondary zoomIn animated delay-08s">
+              <div class="card-body">
+                <h5 class="card-title">DESTINATION</h5>
+                <p class="card-text">{{track.destination}}</p>
+              </div>
+            </div>
+            <div class="card text-center text-white bg-secondary zoomIn animated delay-11s">
+              <div class="card-body">
+                <h5 class="card-title">CARGO TYPE</h5>
+                <p class="card-text">{{track.cargoType}}</p>
+              </div>
+            </div>
+            <div class="card text-center text-white bg-secondary zoomIn animated delay-14s">
+              <div class="card-body">
+                <h5 class="card-title">PIECES</h5>
+                <p class="card-text">{{track.pieces}}</p>
+              </div>
+            </div>
+            <div class="card text-center text-white bg-secondary zoomIn animated delay-17s">
+              <div class="card-body">
+                <h5 class="card-title">WEIGHT</h5>
+                <p class="card-text">{{track.weight}} KG</p>
+              </div>
+            </div>
+            <div class="card text-center text-white bg-secondary zoomIn animated delay-2s">
+              <div class="card-body">
+                <h5 class="card-title">VOLUMEN</h5>
+                <p class="card-text">{{track.volumen}} KG</p>
+              </div>
+            </div>
+          </div>
+          <table class="table table-sm table-secondary table-striped zoomIn animated delay-23s ">
+            <thead>
+              <tr class="text-white">
+                <th scope="col">No.</th>
+                <th scope="col">Date</th>
+                <th scope="col">Pieces</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of track.trakingHistors; let i = index" class="zoomIn animated" [ngStyle]="{'animation-delay.s': timerAmimation+(i*0.3)}">
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.date | date:'medium'}}</td>
+                <td>{{item.pieces}}</td>
+                <td>{{item.weight}}</td>
+                <td>{{item.note}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="close()" class="btn colorModal text-white " data-dismiss="modal"><strong>Close</strong></button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

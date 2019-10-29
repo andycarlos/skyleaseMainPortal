@@ -1,20 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackingService {
 
-  readonly URL_API = 'http://skylease.cargolink.aero/tracking/index.asp?awbno=';
-
-  constructor(private http: HttpClient) {
+   URL_API = '';
+    constructor(private http: HttpClient,
+        location: Location) {
+       
+       this.URL_API = (location as any)._platformLocation._doc.baseURI + "api/traking";
    }
 
-  getTracking(track: string) {
-    let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set('Accept', '*/*');
-    return this.http.get(this.URL_API + track, {responseType: 'text', headers: httpHeaders});
+    getTracking(track: string): Observable<Tracking> {
+        let params = new HttpParams().set("trak", track)
+        return this.http.get <Tracking>(this.URL_API, { params: params });
   }
 
+}
+export interface Tracking {
+    name: string;
+    origin: string;
+    destination: string;
+    cargoType: string;
+    pieces: string;
+    weight: string;
+    volumen: string;
+    trakingHistors: TrakingHistor[];  
+}
+interface TrakingHistor {
+    date: Date;
+    Pieces: string;
+    Weight: string;
+    Note: string;
 }

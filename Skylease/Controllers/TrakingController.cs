@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using ServiceReference1;
+using Skylease.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System.Xml.Serialization;
-using Skylease.Models;
-using ServiceReference1;
 
 namespace Skylease.Controllers
 {
@@ -23,10 +21,10 @@ namespace Skylease.Controllers
             ArrayOfXElement a = wsUtilSoapClient.getTrackingAsync(trak).Result;
             ArrayOfXElement b = wsUtilSoapClient.getTrackAwbAsync(trak).Result;
             ArrayOfXElement c = wsUtilSoapClient.getAgentSimpleAsync(trak, "#@io(*^^!jl").Result;
+            ArrayOfXElement d = wsUtilSoapClient.getTrackBookAsync(trak).Result;
 
-            if (a.Nodes.Count == 2 && b.Nodes.Count == 2 && c.Nodes.Count == 2)
+            try
             {
-                //awb
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(Models.awb.diffgram));
                 Models.awb.diffgram awb = (Models.awb.diffgram)xmlSerializer.Deserialize(b.Nodes[1].CreateReader());
                 //trakiing
@@ -36,20 +34,20 @@ namespace Skylease.Controllers
                 XmlSerializer xmlSerializer2 = new XmlSerializer(typeof(Models.agent.diffgram));
                 Models.agent.diffgram agent = (Models.agent.diffgram)xmlSerializer2.Deserialize(c.Nodes[1].CreateReader());
 
-                List<Models.trakingHistory.NewDataSetTable> trakings = trakin.NewDataSet.OrderByDescending(x => x.DATEIN).ToList();
+                List<Models.trakingHistory.NewDataSetTable> trakings = trakin.NewDataSet.OrderBy(x => x.DATEIN).ToList();
 
                 traking = new Traking()
                 {
-                    Name = agent.NewDataSet.Table.Name.Trim(),
+                    Name =(agent.NewDataSet==null)?"No Agent": agent.NewDataSet.Table.Name.Trim(),
                     Origin = awb.NewDataSet.Table.origin.Trim(),
                     Destination = awb.NewDataSet.Table.destination.Trim(),
                     CargoType = "GENERAL",
                     Pieces = awb.NewDataSet.Table.totpieces.ToString(),
-                    Weight = Math.Round(awb.NewDataSet.Table.totweight,0).ToString(),
-                    Volumen =Math.Round(awb.NewDataSet.Table.totvolume,0).ToString(),
+                    Weight = Math.Round(awb.NewDataSet.Table.totweight, 0).ToString(),
+                    Volumen = Math.Round(awb.NewDataSet.Table.totvolume, 0).ToString(),
                     TrakingHistors = trakings.Select(x => new TrakingHistor()
                     {
-                        date = x.DATEIN,
+                        Date = x.DATEIN,
                         Note = x.NOTE.Trim(),
                         Pieces = x.PIECES.ToString(),
                         Weight = x.WEIGHT.ToString()
@@ -57,6 +55,11 @@ namespace Skylease.Controllers
                     }).ToList()
                 };
             }
+            catch (Exception e)
+            {
+                return Ok(null);
+            }
+
             return Ok(traking);
         }
     }
